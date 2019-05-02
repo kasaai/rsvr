@@ -1,9 +1,4 @@
 #' @export
-triangle <- function(data) {
-  new_tibble(data, nrow = nrow(data), class = "tbl_triangle")
-}
-
-#' @export
 mack_chain_ladder <- function(weights_col = NULL, alpha_col = NULL, est_sigma = "log-linear", tail = FALSE,
                               tail_se = NULL, tail_sigma = NULL, mse_method = "Mack") {
   specs <- list(
