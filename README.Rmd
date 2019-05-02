@@ -1,0 +1,45 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# rsvr
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+Initial prototyping for a tidy approach for loss reserving
+
+```{r}
+library(tidyverse)
+library(rsvr)
+
+data <- ChainLadder::ABC %>%
+  as.data.frame() %>%
+  as_tibble() %>%
+  mutate(
+    origin = as.integer(origin),
+    dev = as.integer(dev),
+    type = "paid_loss",
+    segment = "west-auto",
+    currency = "USD",
+    origin_interval = 1,
+    dev_interval = 1
+  )
+
+mack_spec <- mack_chain_ladder()
+mack_spec
+
+result <- mack_spec %>% 
+  fit(data)
+result
+```
