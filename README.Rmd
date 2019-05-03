@@ -17,6 +17,8 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
+[**Live design doc**](https://docs.google.com/document/d/1x2Pi7tujWLAQlqd0chBXb0Ml0Ga2HK797OVJSaQQjv0/edit)
+
 Initial prototyping for a tidy approach for loss reserving
 
 ```{r}
