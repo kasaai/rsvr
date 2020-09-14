@@ -1,0 +1,102 @@
+digraph{
+
+      newrank = true
+      graph[rankdir = LR, splines = ortho, compound = true, fontname = Lato]
+
+      node[fontname = Lato, shape = rectangle, style = filled, fillcolor = LemonChiffon]
+      A[label = 'Claims Data Warehouse']
+      B[label = 'Loss Development Triangles']
+
+
+      subgraph cluster_diag {
+        rank = same
+        graph[shape = rectangle]
+        style = rounded
+        bgcolor = Gold
+
+        label = 'Diagnostics'
+        node[shape = rectangle, style = filled, fillcolor = LemonChiffon, margin = 0.25]
+        c1[label = 'Outlier and anomalous data detection']
+        c2[label = 'Changes to paid, incurred, counts triangles']
+        c3[label = 'Changes to frequency and severity trends']
+
+      }
+
+      subgraph cluster_methods {
+        rank = same
+        graph[shape = rectangle]
+        style = rounded
+        bgcolor = Gold
+
+        label = 'Reserving Methods'
+        node[shape = rectangle, style = filled, fillcolor = LemonChiffon, margin = 0.25]
+        d1[label = 'Triangle-Based Models']
+        d2[label = 'Bayesian Models']
+        d3[label = 'Individual Claims Models']
+
+      }
+
+      subgraph cluster_judgment {
+        rank = same
+        graph[shape = rectangle]
+        style = rounded
+        bgcolor = Gold
+
+        label = 'Actuarial Judgment'
+        node[shape = rectangle, style = filled, fillcolor = LemonChiffon, margin = 0.25]
+        e1[label = 'Link ratios selections']
+        e2[label = 'A priori LR selections']
+        e3[label = 'Prior distributions for Bayesian Models']
+        e4[label = 'Trend selections']
+        e5[label = 'Documentation for actuarial judgment']
+
+      }
+
+      F[label = 'Ultimate Loss Selection']
+
+      subgraph cluster_communicate {
+        rank = same
+        graph[shape = rectangle]
+        style = rounded
+        bgcolor = Gold
+
+        label = 'Communicate Results'
+        node[shape = rectangle, style = filled, fillcolor = LemonChiffon, margin = 0.25]
+        g1[label = 'Rmarkdown Document/Notebook']
+
+      }
+
+      subgraph cluster_output {
+        rank = same
+        graph[shape = rectangle]
+        style = rounded
+        bgcolor = Gold
+
+        label = 'Output to Stakeholders'
+        node[shape = rectangle, style = filled, fillcolor = LemonChiffon, margin = 0.25]
+        h1[label = 'Export important outputs for presentations']
+        h2[label = 'Export outputs required by Finance and other teams']
+      }
+
+      I[label = 'Save Result to Database']
+
+      {rank = same; B -> e3 -> h1[style = invis]}
+      {rank = same; d2 -> g1 -> I[style = invis]}
+
+      edge[color = black, arrowhead = vee, arrowsize = 1.25, weight = 5]
+
+      A -> B
+      B -> c2 [ltail = B, lhead = cluster_diag]
+      c2 -> d2 [ltail = cluster_diag, lhead = cluster_methods]
+
+      e4 -> F [ltail = cluster_judgment, lhead = F]
+      F -> g1 [ltail = F, lhead = cluster_communicate]
+
+      g1 -> e5 [ltail = cluster_communicate, lhead = cluster_judgment]
+      h1 -> I [ltail = cluster_output, lhead = I]
+
+      edge[color = black, arrowhead = vee, arrowsize = 1.25, weight = 1]
+      d3 -> e3 [ltail = cluster_methods, lhead = cluster_judgment]
+      g1 -> h1 [ltail = cluster_communicate, lhead = cluster_output]
+
+}
